@@ -36,7 +36,12 @@ class Advertisements(models.Model):
             )
         return self.update_at.strftime('%d.%m.%Y в %H:%M:%S')
 
-
+    @admin.display(description='Фото')
+    def get_html_image(self):
+        if self.image:
+            return format_html(
+                '<img scr="{url}" style="max_width: 80px; max_height: 80px;"', url= self.image.url
+            )
     class Meta:
         db_table = "advertisements"
 
